@@ -2,6 +2,7 @@
 
 import { CreateTodo } from "@/app/actions";
 import { useFormStatus } from "react-dom"
+// import { useActionState } from "react";
 
 const initialState = {
     message: "",
@@ -16,11 +17,11 @@ function SubmitButton() {
     );
 }
 export function AddForm() {
-    const [state, formAction] = useActionState(CreateTodo, initialState);
+    // const [state, formAction] = useActionState(CreateTodo, initialState);
 
     return (
         <div className="">
-            <form action={formAction}>
+            <form action={CreateTodo}>
                 <label htmlFor="todo" className="">Enter Task</label>
                 <input type="text" className="" required />
                 <SubmitButton />

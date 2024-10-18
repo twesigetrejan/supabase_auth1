@@ -134,9 +134,9 @@ export const signOutAction = async () => {
 
 //todo creation
 export async function CreateTodo(
-  prevState: {
-    message: string;
-  },
+  // prevState: {
+  //   message: string;
+  // },
   formData: FormData,
 ) {
   const schema = z.object({
