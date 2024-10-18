@@ -151,6 +151,7 @@ export async function CreateTodo(
   const data = parse.data;
 
   try {
+    console.log(formData.get("todo"))
     await supabase.from("todos").insert([formData]);
     revalidatePath("/");
   } catch (error) {
