@@ -4,6 +4,9 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+import { supabase } from "@/lib/supabaseClient";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -128,3 +131,30 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
+
+//todo creation
+export async function CreateTodo(
+  prevState: {
+    message: string;
+  },
+  formData: FormData,
+) {
+  const schema = z.object({
+    todo: z.string().min(1),
+  });
+  const parse = schema.safeParse({
+    todo: formData.get("todo"),
+  });
+  if (!parse.success) {
+    return { message: "Failed to create todo" };
+  }
+  const data = parse.data;
+
+  try {
+    await supabase.from("todos").insert([formData]);
+    revalidatePath("/");
+  } catch (error) {
+    return { message: "Failed to create todo" };
+  }
+
+}
