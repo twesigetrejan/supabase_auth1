@@ -146,7 +146,7 @@ export async function CreateTodo(
     todo: formData.get("todo"),
   });
   if (!parse.success) {
-    return { message: "Failed to create todo" };
+    return { message: "Failed to create todo " };
   }
   const data = parse.data;
 
