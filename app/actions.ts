@@ -152,8 +152,8 @@ export async function CreateTodo(
 
   try {
     console.log(formData.get("todo"))
-    await supabase.from("todos").insert([formData]);
-    revalidatePath("/");
+    await supabase.from("todos").insert(data);
+    revalidatePath("/todos");
   } catch (error) {
     return { message: "Failed to create todo" };
   }
