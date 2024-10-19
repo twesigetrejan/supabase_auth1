@@ -23,7 +23,7 @@ export function AddForm() {
         <div className="">
             <form action={CreateTodo}>
                 <label htmlFor="todo" className="">Enter Task</label>
-                <input type="text" name="todo" className="" required />
+                <input type="text" name="todo" className="px-1" required />
                 <SubmitButton />
             </form>
 
